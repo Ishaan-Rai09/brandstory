@@ -1,0 +1,100 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  * {
+    @apply border-[#262626];
+  }
+  
+  html {
+    @apply scroll-smooth;
+  }
+  
+  body {
+    background-color: #0a0a0f;
+    color: #f8f8fc;
+    font-feature-settings: "rlig" 1, "calt" 1;
+  }
+}
+
+/* Animation Utilities */
+.animation-delay-150 {
+  animation-delay: 150ms;
+}
+
+.animation-delay-200 {
+  animation-delay: 200ms;
+}
+
+.animation-delay-300 {
+  animation-delay: 300ms;
+}
+
+.animation-delay-500 {
+  animation-delay: 500ms;
+}
+
+/* Hide default cursor when custom cursor is active */
+.cursor-container {
+  @apply hidden;
+}
+
+@media (min-width: 1024px) {
+  .cursor-container {
+    @apply block;
+  }
+  
+  html, body {
+    cursor: none !important;
+  }
+  
+  a, button, [role="button"], input, textarea, select {
+    cursor: none !important;
+  }
+
+  /* Exception for Clerk components */
+  .cl-rootBox, .cl-card, .cl-internal-b3fm6y, .cl-component, 
+  .cl-auth-form-button, .cl-auth-button, .cl-modal-backdrop, .cl-modal-container,
+  .cl-modal-container *, .cl-rootBox * {
+    cursor: auto !important;
+  }
+}
+
+/* Pulse animation for CTA buttons */
+.pulse-animation {
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0% {
+    box-shadow: 0 0 0 0 rgba(139, 92, 246, 0.4);
+  }
+  70% {
+    box-shadow: 0 0 0 10px rgba(139, 92, 246, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(139, 92, 246, 0);
+  }
+}
+
+/* Animation for chart elements */
+@keyframes grow {
+  from {
+    height: 0;
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.animate-dash {
+  animation: dash 1.5s linear infinite;
+}
+
+@keyframes dash {
+  to {
+    stroke-dashoffset: 100;
+  }
+}
