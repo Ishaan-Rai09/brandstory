@@ -408,7 +408,7 @@ export default function SupportPage() {
                     </div>
                     
                     <div className="flex justify-end">
-                      <Button type="submit" variant="neon">
+                      <Button type="submit" variant="default" className="bg-accent hover:bg-accent/90">
                         Send Message
                         <ArrowRight className="w-4 h-4 ml-2" />
                       </Button>

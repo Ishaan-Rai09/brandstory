@@ -1,19 +1,15 @@
 "use client";
 
 import React, { useState } from "react";
-import { motion } from "framer-motion";
+import { useParams } from "next/navigation";
 import { 
   Download, 
   Copy, 
   Share2, 
   Save, 
-  Sparkles, 
   Check,
   Link as LinkIcon,
   X,
-  ChevronDown,
-  ChevronUp,
-  Edit,
   RefreshCw
 } from "lucide-react";
 import { Container } from "@/components/ui/container";
@@ -46,7 +42,9 @@ const tabs = [
   { id: "social", label: "Social Media" },
 ];
 
-export default function BrandingProjectPage({ params }) {
+export default function BrandingProjectPage() {
+  const params = useParams();
+  const id = params.id as string;
   const [activeTab, setActiveTab] = useState("linkedin");
   const [copied, setCopied] = useState(false);
   const [showShareModal, setShowShareModal] = useState(false);
@@ -58,13 +56,13 @@ export default function BrandingProjectPage({ params }) {
     socialMediaBios: brandingContent.socialMediaBios,
   });
   
-  const handleCopy = (text) => {
+  const handleCopy = (text: string) => {
     navigator.clipboard.writeText(text);
     setCopied(true);
     setTimeout(() => setCopied(false), 2000);
   };
   
-  const handleRegenerate = (field) => {
+  const handleRegenerate = (field: string) => {
     setIsGenerating(true);
     
     // Simulate regeneration
@@ -84,14 +82,14 @@ export default function BrandingProjectPage({ params }) {
     }, 2000);
   };
   
-  const handleContentChange = (field, value) => {
+  const handleContentChange = (field: string, value: string) => {
     setEditableContent({
       ...editableContent,
       [field]: value
     });
   };
   
-  const handlePitchLineChange = (index, value) => {
+  const handlePitchLineChange = (index: number, value: string) => {
     const newPitchLines = [...editableContent.pitchLines];
     newPitchLines[index] = value;
     setEditableContent({
@@ -100,7 +98,7 @@ export default function BrandingProjectPage({ params }) {
     });
   };
   
-  const handleSocialMediaChange = (platform, value) => {
+  const handleSocialMediaChange = (platform: string, value: string) => {
     setEditableContent({
       ...editableContent,
       socialMediaBios: {
@@ -118,7 +116,7 @@ export default function BrandingProjectPage({ params }) {
             <div>
               <div className="flex items-center space-x-2">
                 <h1 className="text-2xl font-bold">Professional Brand Story</h1>
-                <Badge variant="neon">Personal</Badge>
+                <Badge variant="default" className="bg-accent text-white">Personal</Badge>
               </div>
               <p className="text-foreground/70">Generated on May 15, 2023</p>
             </div>
@@ -127,7 +125,13 @@ export default function BrandingProjectPage({ params }) {
               <Button 
                 variant="outline" 
                 className="flex items-center space-x-2"
-                onClick={() => handleCopy(editableContent[activeTab === "linkedin" ? "linkedInBio" : activeTab === "about" ? "aboutMe" : "pitchLines"])}
+                onClick={() => handleCopy(
+                  activeTab === "linkedin"
+                    ? editableContent.linkedInBio
+                    : activeTab === "about"
+                    ? editableContent.aboutMe
+                    : editableContent.pitchLines.join("\n")
+                )}
               >
                 {copied ? <Check className="w-4 h-4" /> : <Copy className="w-4 h-4" />}
                 <span>{copied ? "Copied!" : "Copy"}</span>
@@ -195,7 +199,7 @@ export default function BrandingProjectPage({ params }) {
                       disabled={isGenerating}
                     >
                       {isGenerating ? (
-                        <Loader size="xs" className="mr-2" />
+                        <Loader size="sm" className="mr-2" />
                       ) : (
                         <RefreshCw className="w-4 h-4 mr-2" />
                       )}
@@ -232,7 +236,7 @@ export default function BrandingProjectPage({ params }) {
                       disabled={isGenerating}
                     >
                       {isGenerating ? (
-                        <Loader size="xs" className="mr-2" />
+                        <Loader size="sm" className="mr-2" />
                       ) : (
                         <RefreshCw className="w-4 h-4 mr-2" />
                       )}
@@ -432,7 +436,7 @@ export default function BrandingProjectPage({ params }) {
                 <Button variant="outline" onClick={() => setShowShareModal(false)}>
                   Cancel
                 </Button>
-                <Button variant="neon" onClick={() => setShowShareModal(false)}>
+                <Button variant="default" className="bg-accent hover:bg-accent/90" onClick={() => setShowShareModal(false)}>
                   Done
                 </Button>
               </div>

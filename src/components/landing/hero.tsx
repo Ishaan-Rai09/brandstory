@@ -52,7 +52,7 @@ const Hero = () => {
               transition={{ delay: 0.6, duration: 0.7 }}
             >
               <SignUpButton mode="modal">
-                <Button variant="neon" size="xl">Get Started Free</Button>
+                <Button variant="default" size="lg" className="bg-accent hover:bg-accent/90">Get Started Free</Button>
               </SignUpButton>
               <Button variant="glass" size="xl" asChild>
                 <Link href="#how-it-works">See How It Works</Link>

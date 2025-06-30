@@ -1,16 +1,11 @@
 "use client";
 
 import React, { useState } from "react";
-import { motion } from "framer-motion";
 import { 
   CreditCard, 
-  Calendar, 
   CheckCircle2, 
   Download, 
-  ChevronDown, 
-  ChevronUp,
   AlertCircle,
-  Check,
   X
 } from "lucide-react";
 import { Container } from "@/components/ui/container";
@@ -78,7 +73,7 @@ export default function BillingPage() {
     cvc: "",
   });
   
-  const handleInputChange = (e) => {
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     setPaymentFormData({
       ...paymentFormData,
@@ -86,7 +81,7 @@ export default function BillingPage() {
     });
   };
   
-  const handleSubmitPayment = (e) => {
+  const handleSubmitPayment = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     // Simulate payment processing
     setTimeout(() => {
@@ -117,7 +112,7 @@ export default function BillingPage() {
                     <h3 className="text-xl font-bold mr-3 capitalize">
                       {billingData.currentPlan} Plan
                     </h3>
-                    <Badge variant={billingData.currentPlan === "free" ? "neon" : "neon-cyan"}>
+                    <Badge variant="default" className={billingData.currentPlan === "free" ? "bg-accent text-white" : "bg-accent-cyan text-white"}>
                       {billingData.currentPlan === "free" ? "Current" : "Active"}
                     </Badge>
                   </div>
@@ -132,7 +127,7 @@ export default function BillingPage() {
                 
                 <div className="mt-4 md:mt-0">
                   {billingData.currentPlan === "free" ? (
-                    <Button variant="neon-cyan">Upgrade to Pro</Button>
+                    <Button variant="default" className="bg-accent-cyan hover:bg-accent-cyan/90">Upgrade to Pro</Button>
                   ) : (
                     <Button variant="outline">Cancel Subscription</Button>
                   )}
@@ -228,7 +223,7 @@ export default function BillingPage() {
                         >
                           Cancel
                         </Button>
-                        <Button type="submit" variant="neon">
+                        <Button type="submit" variant="default" className="bg-accent hover:bg-accent/90">
                           Save Card
                         </Button>
                       </div>
@@ -243,7 +238,8 @@ export default function BillingPage() {
                         Add a payment method to upgrade to Pro
                       </p>
                       <Button 
-                        variant="neon" 
+                        variant="default" 
+                        className="bg-accent hover:bg-accent/90"
                         onClick={() => setShowPaymentForm(true)}
                       >
                         Add Payment Method
@@ -276,7 +272,7 @@ export default function BillingPage() {
                   />
                 </div>
                 <span className={`text-lg ${annual ? "text-foreground" : "text-foreground/50"}`}>
-                  Yearly <Badge variant="neon" className="ml-2">Save 33%</Badge>
+                  Yearly <Badge variant="default" className="ml-2 bg-accent text-white">Save 33%</Badge>
                 </span>
               </div>
             </div>
@@ -338,8 +334,12 @@ export default function BillingPage() {
                       </Button>
                     ) : (
                       <Button 
-                        variant={plan.color === "purple" ? "neon" : "neon-cyan"} 
-                        className="w-full"
+                        variant="default" 
+                        className={`w-full ${
+                          plan.color === "purple" 
+                            ? "bg-accent hover:bg-accent/90" 
+                            : "bg-accent-cyan hover:bg-accent-cyan/90"
+                        }`}
                       >
                         {plan.id === "free" ? "Downgrade to Free" : "Upgrade to Pro"}
                       </Button>

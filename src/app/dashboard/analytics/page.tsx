@@ -2,9 +2,6 @@
 
 import React, { useState } from "react";
 import { 
-  BarChart, 
-  LineChart, 
-  PieChart, 
   Calendar, 
   ArrowUp, 
   ArrowDown, 
@@ -18,11 +15,15 @@ import {
 import { Container } from "@/components/ui/container";
 import { Button } from "@/components/ui/button";
 import { CardGlass, CardHeader, CardTitle, CardDescription, CardContent, CardFooter } from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
 
 // This is a placeholder for actual chart components
 // In a real implementation, you would use a library like Chart.js, Recharts, or similar
-const ChartPlaceholder = ({ type, height = 200 }) => {
+interface ChartPlaceholderProps {
+  type: 'line' | 'bar' | 'pie';
+  height?: number;
+}
+
+const ChartPlaceholder = ({ type, height = 200 }: ChartPlaceholderProps) => {
   return (
     <div 
       className="relative w-full rounded-md overflow-hidden"
@@ -371,7 +372,7 @@ export default function AnalyticsPage() {
               </div>
             </CardContent>
             <CardFooter>
-              <Button variant="neon" className="w-full">
+              <Button variant="default" className="w-full bg-accent hover:bg-accent/90">
                 Generate Detailed Report
               </Button>
             </CardFooter>

@@ -110,8 +110,8 @@ const HowItWorks = () => {
           viewport={{ once: true }}
           transition={{ duration: 0.5, delay: 0.8 }}
         >
-          <SignUpButton mode="modal" redirecturl="/dashboard">
-            <Button variant="neon-cyan" size="lg">
+          <SignUpButton mode="modal">
+            <Button variant="default" size="lg" className="bg-accent-cyan hover:bg-accent-cyan/90">
               Get Started Now
             </Button>
           </SignUpButton>

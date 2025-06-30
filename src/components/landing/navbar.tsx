@@ -61,7 +61,7 @@ const Navbar = () => {
                 <Button variant="ghost">Login</Button>
               </SignInButton>
               <SignUpButton mode="modal">
-                <Button variant="neon" glow>Sign Up</Button>
+                <Button variant="default" className="bg-accent hover:bg-accent/90">Sign Up</Button>
               </SignUpButton>
             </SignedOut>
             <SignedIn>

@@ -98,7 +98,7 @@ const Pricing = () => {
               />
             </div>
             <span className={`text-lg ${annual ? "text-[#f8f8fc]" : "text-[#f8f8fc]/50"}`}>
-              Yearly <Badge variant="neon" className="ml-2">Save 33%</Badge>
+              Yearly <Badge variant="default" className="ml-2 bg-accent text-white">Save 33%</Badge>
             </span>
           </motion.div>
 
@@ -112,13 +112,13 @@ const Pricing = () => {
                 transition={{ duration: 0.5, delay: 0.4 + index * 0.1 }}
               >
                 <CardNeon 
-                  color={plan.color === "purple" ? "purple" : "cyan"} 
+                  color={plan.color === "purple" ? "gold" : "amber"} 
                   className="relative p-6 h-full flex flex-col"
                 >
                   {plan.popular && (
                     <Badge 
-                      variant={plan.color === "purple" ? "neon" : "neon-cyan"} 
-                      className="absolute -top-3 right-6"
+                      variant="default" 
+                      className={`absolute -top-3 right-6 ${plan.color === "purple" ? "bg-accent text-white" : "bg-accent-cyan text-white"}`}
                     >
                       Most Popular
                     </Badge>
@@ -155,10 +155,10 @@ const Pricing = () => {
                   </div>
                   
                   <div className="mt-auto">
-                    <SignUpButton mode="modal" redirecturl={plan.price === 0 ? "/dashboard" : "/dashboard?plan=pro"}>
+                    <SignUpButton mode="modal">
                       <Button 
-                        variant={plan.color === "purple" ? "neon" : "neon-cyan"} 
-                        className="w-full"
+                        variant="default" 
+                        className={`w-full ${plan.color === "purple" ? "bg-accent hover:bg-accent/90" : "bg-accent-cyan hover:bg-accent-cyan/90"}`}
                       >
                         {plan.price === 0 ? "Get Started" : "Upgrade to Pro"}
                       </Button>

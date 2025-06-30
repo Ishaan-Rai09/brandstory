@@ -14,7 +14,7 @@ import {
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 
-const features = [
+const features: FeatureCardProps[] = [
   {
     icon: <Sparkles className="w-6 h-6" />,
     title: "AI-Powered Branding",
@@ -116,12 +116,15 @@ const FeatureCard = ({ icon, title, description, color }: FeatureCardProps) => {
       ? "text-accent-cyan" 
       : "text-accent-blue";
   
+  // Map our color types to CardNeon color types
+  const cardColor = color === "purple" ? "gold" : color === "cyan" ? "amber" : "yellow";
+  
   return (
-    <CardNeon color={color} className="h-full p-6 hover:translate-y-[-5px] transition-all duration-300">
+    <CardNeon color={cardColor} className="h-full p-6 hover:translate-y-[-5px] transition-all duration-300">
       <div className={cn("w-12 h-12 rounded-lg flex items-center justify-center mb-4", bgColorClass)}>
         {React.cloneElement(icon as React.ReactElement, { 
           className: cn("w-6 h-6", textColorClass)
-        })}
+        } as any)}
       </div>
       <h3 className="text-xl font-semibold mb-3">{title}</h3>
       <p className="text-[#f8f8fc]/70">{description}</p>
